@@ -9,13 +9,13 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table row">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
+            <th class="col-3">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>                @Html.DisplayNameFor(model => model.price)
@@ -32,8 +32,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
+            <td style="text-overflow: clip; word-break: keep-all; line-break: anywhere">
+               
+
+                 @Html.DisplayFor(modelItem => item.Description)
+                    
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.price)

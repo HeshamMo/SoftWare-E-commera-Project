@@ -7,14 +7,18 @@
 <h1>Details</h1>
 
 <div class="container">
-    <h4>@Model.Name</h4>
+   
     <div class="card">
+        <div class="card-header">
+
+        <h4>@Model.Name</h4>
+        </div>
         <div class="card-body">
-            <h4>
+            <h6>
                 @Model.Description
-            </h4>
-            
-          
+            </h6>
+
+
             @if(@Model.price == 0)
             {
                 <p class="card-text">Confidential Price</p>
@@ -25,20 +29,20 @@
                 <p class="card-text">@Model.price EGP</p>
 
             }
-           
-            <p>Publisher : @Model.publisher.Name</p>
-        @if (@Model.publisher.PhoneNumber != null)
-        {
-            <p>Contact me : <a href="tel:+@Model.publisher.PhoneNumber">@Model.publisher.PhoneNumber</a></p>
 
-        }
+            <p>Publisher : @Model.publisher.Name</p>
+            @if(@Model.publisher.PhoneNumber != null)
+            {
+                <p>Contact me : <a href="tel:+@Model.publisher.PhoneNumber">@Model.publisher.PhoneNumber</a></p>
+
+            }
             <p>
                 @{
                     DateTime date = @Model.publishedAt;
                     var days = DateTime.Now.Subtract(date).Days;
                     //{date.Day}/{date.Month}/{date.Year}
-                    string DaysAgo="0";
-                    if (days == 0)
+                    string DaysAgo = "0";
+                    if(days == 0)
                     {
                         DaysAgo = "Today";
                     }

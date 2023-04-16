@@ -32,21 +32,21 @@
             <div class="card-body">
                          
                           
-                <h4 class="card-title">@item.Name</h4>
-                <p class="card-text">@item.Description</p>
+                <h4 class="card-title" style="overflow: hidden; height: 120px;">@item.Name</h4>
+                        <p class="card-text" style="color: #796f6f; overflow: hidden; height: 120px;" >@item.Description</p>
                 
                 @if (item.price == 0)
                 {
-                    <p class="card-text">Confidential Price</p>
+                            <p class="card-text" style="color: #796f6f;">Confidential Price</p>
 
                 }
                 else
                 {
-                    <p class="card-text">@item.price EGP</p>
+                            <p class="card-text" style="color: #796f6f;">@item.price EGP</p>
 
                 }
-                <p>@item.Location</p>
-                <p>
+                        <p style="color: #796f6f;">@item.Location</p>
+                        <p style="color: #796f6f;">
                     @{
                         DateTime date = @item.publishedAt;
                         var days = DateTime.Now.Subtract(date).Days;
@@ -58,7 +58,7 @@
                         }
                         else
                         {
-                            DaysAgo = $"{DaysAgo} days ago";
+                            DaysAgo = $"{days} days ago";
                         }
                     }
                     Published :@DaysAgo
@@ -72,3 +72,32 @@
 </div>
 
     </div>
+<div class="row justify-content-center">
+    @if(Convert.ToInt32(ViewData["page"])!=0)
+   {
+       <form asp-action="Search" style="margin: 5px">
+           @{
+               int pageNum = Convert.ToInt32(@ViewData["page"]) - 1;
+               pageNum = pageNum < 0 ? 0 : pageNum;
+           }
+           <input type="hidden" value="@pageNum" name="pageNum"/>
+           <input type="hidden" value="@ViewData["keyword"]" name="keyword"/>
+           <button class="btn-primary" type="submit" name="submit" value="submit">Back</button>
+       </form>
+   }
+    @if (Model.Count() != 0){
+   
+    <form asp-action="Search" style="margin:5px">
+        @{
+            int pageNum = Convert.ToInt32(@ViewData["page"]) + 1;
+            if (@Model.Count() == 0)
+            {
+                pageNum--; 
+            }
+        }
+        <input type="hidden" value="@pageNum" name="pageNum"/>
+        <input type="hidden" value="@ViewData["keyword"]" name="keyword"/>
+        <button class="btn-primary" type="submit" name="submit" value="submit">Next</button>
+    </form>
+    }
+</div>

@@ -173,12 +173,28 @@ namespace WebApplication25.Controllers
         }
         [AllowAnonymous]
 
-        public IActionResult Search(string keyword)
+        public IActionResult Search(string keyword,int pageNum)
         {
+            ViewData["page"] = pageNum;
+            ViewData["keyword"] = keyword;
             var products =
                 _context.Products.Where(
                     p => p.Name.ToLower().Contains(keyword.ToLower()) ||
-                    p.Description.ToLower().Contains(keyword.ToLower())).ToList();
+                         p.Description.ToLower().Contains(keyword.ToLower()) ||
+                         p.price.ToString().ToLower().Contains(keyword.ToLower()) ||
+                         p.Location.ToLower().Contains(keyword.ToLower())).ToList();
+
+            if (pageNum != 0)
+            {
+                products = products.Skip(pageNum * 3).Take(3).ToList();
+            }
+            else
+            {
+                products = products.Take(3).ToList();
+            }
+                   
+
+
 
             return View(products);
         }
