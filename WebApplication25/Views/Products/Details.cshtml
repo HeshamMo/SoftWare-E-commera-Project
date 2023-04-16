@@ -41,7 +41,7 @@
                     DateTime date = @Model.publishedAt;
                     var days = DateTime.Now.Subtract(date).Days;
                     //{date.Day}/{date.Month}/{date.Year}
-                    string DaysAgo = "0";
+                    string DaysAgo = days.ToString(); 
                     if(days == 0)
                     {
                         DaysAgo = "Today";
